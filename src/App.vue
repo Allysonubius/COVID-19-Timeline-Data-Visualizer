@@ -6,6 +6,7 @@
     <!--          header section -->
                 <div class="covid_header">
                     <div>
+                        <h3>Selecione o páis:</h3>
                         <vSelect class="select" :clearable="false" :value="currentCountry" :options="countryList"
                                  @input="switchCountry"></vSelect>
                     </div>
@@ -23,7 +24,7 @@
 
     <!--            time machine -->
                 <div v-if="!dataCurrent.isUk">
-                    <div class="title">{{ $t('subtitles.timeMachine') }}</div>
+                    <div class="title">{{ $t('Máquina no tempo') }}</div>
                     <div class="mBlock">
                         <SlideController :start-date="startDate" :end-date="endDate" :hidePlayButton="true"
                                          :disableClick="true"
@@ -43,7 +44,7 @@
 
     <!--            near by cases -->
                 <div v-if="countryName==='UK' || countryName==='US'">
-                    <div class="title">{{ $t('subtitles.nearby') }}</div>
+                    <div class="title">{{ $t('Próximos') }}</div>
                     <div class="mBlock">
                         <NearbyCasesFinder :regionData="sortedRegionData" :currentCountry="countryName"></NearbyCasesFinder>
                     </div>
@@ -61,13 +62,13 @@
             <div class="mNav" ref="nav" id="mNavbar" v-if="!desktopLayout">
                 <ul class="nav nav-pills nav-fill" v-scroll-spy-active="{selector: 'li a', class: 'active'}">
                     <li class="nav-item">
-                        <a class="nav-link" href="#charts">{{ $t('nav.current') }}</a>
+                        <a class="nav-link" href="#charts">{{ $t('Atual') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#animation">{{ $t('nav.animation') }}</a>
+                        <a class="nav-link" href="#animation">{{ $t('Animação') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#regionData">{{ $t('nav.map') }}</a>
+                        <a class="nav-link" href="#regionData">{{ $t('Mapa') }}</a>
                     </li>
                 </ul>
             </div>
@@ -80,21 +81,21 @@
 
 <!--               animations -->
                 <div class="mSection" :class="{'mSectionDesktop': desktopLayout}" id="animation">
-                    <div class="title">{{ $t('subtitles.historyAnimation') }}</div>
+                    <div class="title">{{ $t('Historico de animação') }}</div>
                     <BarRaceSection v-if="tableData.hasData" :table-data="tableData" :is-uk="dataCurrent.isUk"></BarRaceSection>
-                    <div class="title">{{ $t('subtitles.ratio') }}</div>
+                    <div class="title">{{ $t('Razão') }}</div>
                     <PieSection :allHistoryData="dataCurrent.history" :mainDate="mainDate"></PieSection>
-                    <div class="title">{{ $t('subtitles.countryCompare') }}</div>
+                    <div class="title">{{ $t('Comparação em países') }}</div>
                     <CountryCompareSection :global-data="dataGlobal"
                                            :country-list="countryList"></CountryCompareSection>
                 </div>
 
 <!--                map and table -->
                 <div class="mSection" :class="{'mSectionDesktop': desktopLayout}" id="regionData">
-                    <div class="title">{{ $t('subtitles.map') }}</div>
+                    <div class="title">{{ $t('Mapa') }}</div>
                     <MapSection :tableData="tableData" :countryName="countryName" :mainDate="mainDate"></MapSection>
                     <br>
-                    <div class="title">{{ $t('subtitles.regionList') }}</div>
+                    <div class="title">{{ $t('Região') }}</div>
                     <RegionTable :regionData="tableData" v-if="tableData.hasData" :mainDate="mainDate" :is-uk="dataCurrent.isUk"
                                  @switchCountry="switchCountry" :current-country="currentCountry" :desktop-layout="desktopLayout"></RegionTable>
                 </div>
@@ -105,8 +106,6 @@
             <div class="mSection" id="share" :class="{mContent:desktopLayout}">
 <!--                share -->
                 <div v-if="!isLocaleCN">
-                    <div class="title">Share to Friends</div>
-                    <ShareIcons></ShareIcons>
                 </div>
 
 
@@ -131,7 +130,7 @@
 <!--                   Mini app fallback (as not external link should exists) -->
                     <div v-if="isMiniApp">
                         <br>
-                        <div class="title">{{ $t('subtitles.about') }}</div>
+                        <div class="title">{{ $t('About') }}</div>
                         <ul>
                             <li>请使用浏览器访问 covid19.uclcssa.cn 以获取本页面数据来源及更新时间</li>
                             <li>本页面开源于Github，欢迎提供任何建议及贡献！</li>
@@ -158,24 +157,24 @@
                         <li><a href="https://www.iconfinder.com/p/coronavirus-awareness-icons">Coronavirus Awareness
                             Icons - iconfinder</a></li>
                         <li>{{lastUpdated}}</li>
-                        <li v-if="isLocaleCN">感谢 <a href="https://github.com/isjeffcom/">@isjeff</a> 提供的英国数据API</li>
+                        <li v-if="isLocaleCN">obrigado <a href="https://github.com/isjeffcom/">@isjeff</a> API de dados britânica fornecida</li>
                     </ul>
 
 
-                    <div class="title">{{ $t('subtitles.about') }}</div>
+                    <div class="title">{{ $t('About') }}</div>
                     <ul>
-                        <li>This project is open sourced at <a
-                                href="https://github.com/henryz00/COVID-19-Data-Visualizer-UK">Github Repository</a>,
-                            pull requests and issues welcomed!
+                        <li>Este projeto é de código aberto em <a
+                                href="https://github.com/henryz00/COVID-19-Data-Visualizer-UK">Github Repository Original</a>
                         </li>
-                        <li>© 2020 <a href="https://github.com/henryz00">@henryz00</a> and <a
-                                href="https://github.com/DaviesXue">@DaviesXue</a>
-                            <span>{{isLocaleCN ? " | UCLCSSA 伦敦大学学院中国学联" : " at University College London."}}</span>
+                        <li>Versão em português <a href="https://github.com/Allysonubius/Covid-19-Timeline-PT-BR">GitHub Repositório PT-BR</a>
                         </li>
+                        <li>© 2020 <a href="https://github.com/henryz00">@henryz00</a> e <a
+                                href="https://github.com/DaviesXue">@DaviesXue</a> .
+                            <span>{{isLocaleCN ? " | UCLCSSA Associação Chinesa da University College London" : " na University College London."}}</span>
+                        </li>
+                        <li>Modificado em PT-BR por <a href="https://github.com/Allysonubius?tab=repositories">@Allysonubius </a>(Brazil - Desenvolvedor Full Stack | Estudante iniciante.)</li>
                     </ul>
-                        <div style="font-size:14px; opacity:0.5;">You are free to distribute, embed or edit whole or part of the site without prior notice to us, as long as
-                            you mention the source (covid19track.site or covid19.uclcssa.cn) or keep this section intact. Please see the github repo for more
-                            information if you would like to modify the source code :)
+                        <div style="font-size:14px; opacity:0.5;">Você é livre para distribuir, incorporar ou editar todo ou parte do site sem aviso prévio, conforme desde que você mencione a fonte (covid19track.site ou covid19.uclcssa.cn) ou mantenha esta seção intacta. Consulte o repositório do github para obter mais informações, se você quiser modificar o código fonte.
                         </div>
                 </div>
 
@@ -183,7 +182,8 @@
                 <div style="text-align: center;margin: 50px 0;opacity: 0.5;color: silver;">
                     <img src="./assets/logo_grey.png" style="max-width: 200px;" v-if="isLocaleCN"/>
                     <br><br>
-                    <a href="#" @click="changeLang('en')">English</a> | <a href="#" @click="changeLang('zh')">中文</a>
+                    <a href="#" @click="changeLang('en')">English</a> | <a href="#" @click="changeLang('zh')">中文</a> |
+                    <a href="#" @click="changeLang('pt-br')">Português</a>
                 </div>
             </div>
 
